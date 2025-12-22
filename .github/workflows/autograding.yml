@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  TESTDATA_REPO: 'oslomet-data1500/data1500-testdata-01'  # Replace with your test data repo
+  TESTDATA_REPO: 'oslomet-data1500/data1500-testdata-01'  # Replace with your test data repo yes
   TESTDATA_REF: 'main'
 
 jobs:
