@@ -21,19 +21,28 @@ public class SokMedIndeks {
 		String epostSok = args[2];
 
 		// Last indeksen fra fil (som inneholder serialiserte data man genererte med IndeksBygger)
-		Map<String, Long> indeks = new HashMap<>();
+		Map<String, Long> indeks = null;
         
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(indeksFil))) {
 			indeks = (Map<String, Long>) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
+            return;
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
+            return;
 		}
+        Instant start = Instant.now();
+        Long posisjon = indeks.get(epostSok);
+        Instant slutt = Instant.now();
+
+        Duration dur = Duration.between(start, slutt);
+        long nanos = dur.toNanos();
+        long ms = dur.toMillis();
 
 		
 		// O(1) oppslag i indeksen
-		Long posisjon = null;
+
 		if (indeks != null) {
 			posisjon = indeks.get(epostSok);
 		}
@@ -43,6 +52,7 @@ public class SokMedIndeks {
 			try (RandomAccessFile raf = new RandomAccessFile(dataFil, "r")) {
 				raf.seek(posisjon);
 				String linje = raf.readLine();
+                System.out.println("Fant epost: " + epostSok);
 				System.out.println("Fant linje: " + linje);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -54,7 +64,7 @@ public class SokMedIndeks {
 		// Skriv ut en linje til stdout (System.out i Java) på følgende format:
         // Søket med indeks tok N nanos (M ms).
         // Hvor N er tallet i nanosekunder og M er tallet i millisekunder.
-		System.out.println("...");
+		System.out.println("Søket med indeks tok "+ nanos + " nanos(" + ms + "ms).");
 
 	}
 }

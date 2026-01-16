@@ -35,6 +35,12 @@ public class FinnBruker {
                 // ms står for millisekunder.
                 // returner fra funksjonen
 				        // Skriv din kode her ...
+                      if (linje.contains(epost)) {
+                          Instant slutt = Instant.now();
+                          long ms = Duration.between (start, slutt).toMillis();
+                          System.out.println("Fant epost" + epost +"Tid brukt" + ms +"ms.");
+                          return;
+                      }
         
 			      }    
 		    } catch (FileNotFoundException e) {

@@ -21,11 +21,19 @@ public class HashJoin {
 				        String[] felt = linje.split(",");
 				        if (felt.length == 2) {
                     // Tips: "kast" studentId fra paameldinger til int
+                            int studentId = Integer.parseInt(felt[0].trim());
+                            String kurskode = felt[1].trim();
                     // Tips: hent inn kursnavn fra kurs som String
+                            String studentnavn = studenter.get(studentId);
+                            String kursnavn = kurs.get(kurskode);
                     // Tips: bruke HashMap objekter for å finne studentnavn og kursnavn
                     // Tips: sjekk at studentnavn og kursnavn ikke er null
+
                     // Tips: skriv ut post (linje) til stdout (System.out i Java) på følgende format
                     // <studentnavn> er påmeldt <kursnavn>
+                            if (studentnavn != null && kursnavn != null) {
+                                System.out.println(studentnavn + " er påmeldt " + kursnavn);
+                            }
 					          // Skriv din kode her ...
                   
 				        }
@@ -34,7 +42,7 @@ public class HashJoin {
 			      e.printStackTrace();
 		    }
 	  }
-  
+
     // Funksjonen lastInnMap 
     // Argumenter: 
     // - filnavn (navn til datafilen som skal lastes i minne)

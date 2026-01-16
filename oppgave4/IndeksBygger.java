@@ -26,7 +26,7 @@ public class IndeksBygger {
 				String epost = linje.split(",")[1].trim();  
 				// Tips: sett inn epost og psosisjon i HashMap objektet indeks
                 // Skriv din kode her ...
-                
+                indeks.put(epost,posisjon);
 				posisjon = raf.getFilePointer();
 			}
 
